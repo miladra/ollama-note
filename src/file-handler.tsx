@@ -117,42 +117,6 @@ const FileHandler = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-2xl mx-auto space-y-4">
-        {/* Original Text Box */}
-        <div className="bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-lg font-semibold mb-2">Original Text</h2>
-          <div className="w-full h-48 border rounded-lg p-4 bg-gray-50 overflow-auto">
-            {text || 'No content loaded'}
-          </div>
-        </div>
-
-        {/* Summary Box */}
-        <div className="bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-lg font-semibold mb-2">Summary</h2>
-          <div className="w-full h-32 border rounded-lg p-4 bg-gray-50 overflow-auto">
-            {isLoading && activeProcess === 'summarize' ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
-              </div>
-            ) : (
-              summary || 'No summary generated'
-            )}
-          </div>
-        </div>
-
-        {/* Explanation Box */}
-        <div className="bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-lg font-semibold mb-2">Explanation</h2>
-          <div className="w-full h-48 border rounded-lg p-4 bg-gray-50 overflow-auto">
-            {isLoading && activeProcess === 'explain' ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
-              </div>
-            ) : (
-              explanation || 'No explanation generated'
-            )}
-          </div>
-        </div>
-
         {/* Buttons */}
         <div className="bg-white rounded-lg shadow-md p-4">
           <div className="flex flex-wrap gap-4">
@@ -226,6 +190,43 @@ const FileHandler = () => {
             accept=".txt"
             className="hidden"
           />
+
+             {/* Original Text Box */}
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <h2 className="text-lg font-semibold mb-2">Original Text</h2>
+                    <div className="w-full h-48 border rounded-lg p-4 bg-gray-50 overflow-auto">
+                      {text || 'No content loaded'}
+                    </div>
+                  </div>
+
+                  {/* Summary Box */}
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <h2 className="text-lg font-semibold mb-2">Summary</h2>
+                    <div className="w-full h-32 border rounded-lg p-4 bg-gray-50 overflow-auto">
+                      {isLoading && activeProcess === 'summarize' ? (
+                        <div className="flex items-center justify-center h-full">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
+                        </div>
+                      ) : (
+                        summary || 'No summary generated'
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Explanation Box */}
+                  <div className="bg-white rounded-lg shadow-md p-4">
+                    <h2 className="text-lg font-semibold mb-2">Explanation</h2>
+                    <div className="w-full h-48 border rounded-lg p-4 bg-gray-50 overflow-auto">
+                      {isLoading && activeProcess === 'explain' ? (
+                        <div className="flex items-center justify-center h-full">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
+                        </div>
+                      ) : (
+                        explanation || 'No explanation generated'
+                      )}
+                    </div>
+                  </div>
+
         </div>
       </div>
     </div>
