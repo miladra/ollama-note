@@ -70,7 +70,7 @@ function App() {
 
   const handleFixAndRewrite = async () => {
     if (!inputText) return;
-    const prompt = `Fix any errors and rewrite the following text in clear natural English while maintaining its meaning, do not explain what you did:\n${inputText}`;
+    const prompt = `Fix any errors the following text in clear natural English while maintaining its meaning, do not explain what you did:\n${inputText}`;
     const rewritten = await callOllama(prompt);
     setOutputText(rewritten);
     setCopyStatus('Copy');
