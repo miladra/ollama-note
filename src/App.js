@@ -7,6 +7,7 @@ function App() {
   const [outputText, setOutputText] = useState('');
   const [copyStatus, setCopyStatus] = useState('Copy');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [textDirection, setTextDirection] = useState('ltr');
   const fileInputRef = useRef(null);
 
   const handleLoad = () => {
@@ -54,26 +55,42 @@ function App() {
 
   const handleSummarize = async () => {
     if (!inputText) return;
+    setIsProcessing(true);
     const prompt = `Summarize the following text:\n${inputText}`;
     const summary = await callOllama(prompt);
     setOutputText(summary);
-    setCopyStatus('Copy');
+    setIsProcessing(false);
+    setTextDirection('ltr');
   };
 
   const handleExplain = async () => {
     if (!inputText) return;
+    setIsProcessing(true);
     const prompt = `Explain the following text in natural English, do not explain what you did:\n${inputText}`;
     const explanation = await callOllama(prompt);
     setOutputText(explanation);
-    setCopyStatus('Copy');
+    setIsProcessing(false);
+    setTextDirection('ltr');
   };
 
   const handleFixAndRewrite = async () => {
     if (!inputText) return;
-    const prompt = `Fix any errors the following text in clear natural English while maintaining its meaning, do not explain what you did:\n${inputText}`;
+    setIsProcessing(true);
+    const prompt = `Rewrite following text in natural English while maintaining its meaning accurately, do not explain what you did:\n${inputText}`;
     const rewritten = await callOllama(prompt);
     setOutputText(rewritten);
-    setCopyStatus('Copy');
+    setIsProcessing(false);
+    setTextDirection('ltr');
+  };
+
+  const handleTranslation = async () => {
+    if (!inputText) return;
+    setIsProcessing(true);
+    const prompt = `Translate in Persian while maintaining its meaning, do not explain what you did:\n${inputText}`;
+    const rewritten = await callOllama(prompt);
+    setOutputText(rewritten);
+    setIsProcessing(false);
+    setTextDirection('rtl');
   };
 
   const handleCopy = async () => {
@@ -123,7 +140,11 @@ function App() {
           >
             {copyStatus}
           </button>
+          <button onClick={handleTranslation} disabled={isProcessing}>
+            {isProcessing ? 'Processing...' : 'Explain2'}
+          </button>
         </div>
+
         <div className="text-container">
         <textarea
             value={inputText}
@@ -134,6 +155,7 @@ function App() {
               value={outputText}
               onChange={(e) => setOutputText(e.target.value)}
               placeholder="Output will appear here..."
+              style={{ direction: textDirection }}
           />
         </div>
       </div>
