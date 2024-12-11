@@ -1,8 +1,9 @@
-/* App.css */
 .app {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #fff;
+  color: #000;
 }
 
 .button-container {
@@ -38,4 +39,26 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: none;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .app {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .button-container button {
+    background-color: #555;
+  }
+
+  .button-container button:hover {
+    background-color: #666;
+  }
+
+  .text-container textarea {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #555;
+  }
 }

@@ -66,17 +66,30 @@ function App() {
   const handleExplain = async () => {
     if (!inputText) return;
     setIsProcessing(true);
-    const prompt = `Explain the following text in natural English, do not explain what you did:\n${inputText}`;
+    const prompt = `Explain the following text to natural English, do not explain what you did:\n${inputText}`;
     const explanation = await callOllama(prompt);
     setOutputText(explanation);
     setIsProcessing(false);
     setTextDirection('ltr');
   };
 
-  const handleFixAndRewrite = async () => {
+  const handleFixAndRephrase = async () => {
     if (!inputText) return;
     setIsProcessing(true);
-    const prompt = `Rewrite following text in natural English while maintaining its meaning accurately, do not explain what you did:\n${inputText}`;
+    //const prompt = `Rewrite following text in natural English while maintaining its meaning accurately, do not explain what you did:\n${inputText}`;
+    const prompt = `Rephrase following text to sound more natural to a native English speaker while maintaining its meaning accurately, do not explain what you did:\n${inputText}`;
+    const rewritten = await callOllama(prompt);
+    setOutputText(rewritten);
+    setIsProcessing(false);
+    setTextDirection('ltr');
+  };
+
+
+  const handleFixAndCorrect = async () => {
+    if (!inputText) return;
+    setIsProcessing(true);
+    //const prompt = `Rewrite following text in natural English while maintaining its meaning accurately, do not explain what you did:\n${inputText}`;
+    const prompt = `Correct the grammar and punctuation following text in natural English while maintaining its meaning accurately, do not explain what you did:\n${inputText}`;
     const rewritten = await callOllama(prompt);
     setOutputText(rewritten);
     setIsProcessing(false);
@@ -129,8 +142,11 @@ function App() {
           <button onClick={handleExplain} disabled={isProcessing}>
             {isProcessing ? 'Processing...' : 'Explain'}
           </button>
-          <button onClick={handleFixAndRewrite} disabled={isProcessing}>
-            {isProcessing ? 'Processing...' : 'Rewrite'}
+          <button onClick={handleFixAndCorrect} disabled={isProcessing}>
+            {isProcessing ? 'Processing...' : 'Correct'}
+          </button>
+          <button onClick={handleFixAndRephrase} disabled={isProcessing}>
+            {isProcessing ? 'Processing...' : 'Rephrase'}
           </button>
           <button
               className={`copy-button ${copyStatus === 'Copied!' ? 'copied'
